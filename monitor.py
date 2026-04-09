@@ -4,6 +4,7 @@ IP monitoring script — pings a list of hosts and notifies via ntfy.sh + macOS
 notifications on state changes (up→down, down→up).
 """
 
+import ssl
 import subprocess
 import sys
 import time
@@ -12,6 +13,7 @@ import logging
 from dataclasses import dataclass
 from datetime import datetime
 
+import certifi
 import yaml
 
 logging.basicConfig(
@@ -56,7 +58,8 @@ def _send_ntfy(server: str, topic: str, title: str, message: str, priority: str)
     req.add_header("Priority", priority)
     req.add_header("Tags", "red_circle" if priority == "urgent" else "green_circle")
     try:
-        resp = urllib.request.urlopen(req, timeout=10)
+        ssl_ctx = ssl.create_default_context(cafile=certifi.where())
+        resp = urllib.request.urlopen(req, timeout=10, context=ssl_ctx)
         log.info("ntfy response: %s", resp.status)
     except Exception as exc:
         log.error("ntfy send failed: %s", exc, exc_info=True)
