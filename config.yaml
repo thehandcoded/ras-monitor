@@ -2,13 +2,20 @@ interval: 30  # seconds between each check round
 
 # Hosts to monitor
 hosts:
-  - name: "Router"
-    ip: "192.168.1.1"
-  - name: "NAS"
-    ip: "192.168.1.50"
-  - name: "Camera 1"
-    ip: "192.168.1.101"
-
+  - name: "RAS Sound"
+    ip: "2.0.0.12"
+  - name: "Motor A"
+    ip: "10.0.97.104"
+  - name: "Motor B"
+    ip: "10.0.97.109"
+  - name: "Artnet Crayere 1"
+    ip: "2.169.10.82"
+  - name: "Artnet Crayere 2"
+    ip: "2.169.10.83"
+  - name: "Relay Motor"
+    ip: "10.0.97.107"
+  - name: "Relay Crayere"
+    ip: "10.0.97.111"
 # ntfy.sh notification settings
 ntfy:
   topic: "ruinart-mon-tco5v"  # pick a unique/private name
