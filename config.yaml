@@ -11,7 +11,7 @@ hosts:
 
 # ntfy.sh notification settings
 ntfy:
-  topic: "ruinart-monitoring-changeme"  # pick a unique/private name
+  topic: "ruinart-mon-tco5v"  # pick a unique/private name
   server: "https://ntfy.sh"
 
 # Ping settings

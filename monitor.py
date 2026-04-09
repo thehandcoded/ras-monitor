@@ -50,13 +50,16 @@ def ping(ip: str, timeout_ms: int) -> bool:
 def _send_ntfy(server: str, topic: str, title: str, message: str, priority: str) -> None:
     url = f"{server.rstrip('/')}/{topic}"
     req = urllib.request.Request(url, data=message.encode(), method="POST")
-    req.add_header("Title", title)
+    # HTTP headers must be ASCII — strip emojis from the title
+    ascii_title = title.encode("ascii", "ignore").decode("ascii").strip()
+    req.add_header("Title", ascii_title)
     req.add_header("Priority", priority)
     req.add_header("Tags", "red_circle" if priority == "urgent" else "green_circle")
     try:
-        urllib.request.urlopen(req, timeout=10)
+        resp = urllib.request.urlopen(req, timeout=10)
+        log.info("ntfy response: %s", resp.status)
     except Exception as exc:
-        log.error("ntfy send failed: %s", exc)
+        log.error("ntfy send failed: %s", exc, exc_info=True)
 
 
 def _send_mac_notification(title: str, message: str) -> None:
@@ -102,7 +105,7 @@ def main() -> None:
     log.info("Monitoring %d host(s) every %ds", len(states), interval)
     notify(cfg, "Monitoring started",
            f"Watching: {', '.join(s.name for s in states.values())}",
-           priority="low")
+           priority="default")
 
     while True:
         for ip, state in states.items():
