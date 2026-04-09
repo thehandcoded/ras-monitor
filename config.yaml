@@ -1,0 +1,20 @@
+interval: 30  # seconds between each check round
+
+# Hosts to monitor
+hosts:
+  - name: "Router"
+    ip: "192.168.1.1"
+  - name: "NAS"
+    ip: "192.168.1.50"
+  - name: "Camera 1"
+    ip: "192.168.1.101"
+
+# ntfy.sh notification settings
+ntfy:
+  topic: "ruinart-monitoring-changeme"  # pick a unique/private name
+  server: "https://ntfy.sh"
+
+# Ping settings
+ping:
+  timeout_ms: 2000      # ms to wait for a reply
+  failures_before_alert: 2   # consecutive failures before alerting (avoids false positives)

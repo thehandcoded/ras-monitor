@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ruinart.monitoring</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <!-- Replace with the output of: which python3 -->
+    <string>/usr/bin/python3</string>
+    <string>/Users/claurier/Documents/Projects/Ruinart/Monitoring/monitor.py</string>
+    <string>/Users/claurier/Documents/Projects/Ruinart/Monitoring/config.yaml</string>
+  </array>
+
+  <!-- Restart automatically if the script crashes -->
+  <key>KeepAlive</key>
+  <true/>
+
+  <!-- Start at login -->
+  <key>RunAtLoad</key>
+  <true/>
+
+  <!-- Log output -->
+  <key>StandardOutPath</key>
+  <string>/Users/claurier/Documents/Projects/Ruinart/Monitoring/monitor.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/claurier/Documents/Projects/Ruinart/Monitoring/monitor.log</string>
+</dict>
+</plist>
